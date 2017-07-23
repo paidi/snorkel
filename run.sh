@@ -4,6 +4,9 @@ cd "$SNORKELHOME"
 
 # Make sure the submodules are installed
 git submodule update --init --recursive
+cd treedlib
+zip ../treedlib.zip treedlib/*
+cd ..
 
 # Make sure parser is installed
 PARSER="parser/stanford-corenlp-3.6.0.jar"
