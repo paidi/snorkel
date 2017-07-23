@@ -1,1 +1,1 @@
-from .annotations import SparkLabelAnnotator
+from .annotations import SparkFeatureAnnotator, SparkLabelAnnotator

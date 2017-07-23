@@ -6,8 +6,9 @@ from . import SparkModel
 
 class Candidate(SparkModel):
     """An abstract candidate relation."""
-    def __init__(self, id, context_names, contexts, cids, name='Candidate'):
+    def __init__(self, id, split, context_names, contexts, cids, name='Candidate'):
         self.id = id
+        self.split = split
         self.name = name
         self.__argnames__ = context_names
         for i, name in enumerate(context_names):
@@ -94,6 +95,7 @@ def wrap_candidate(row, class_name='Candidate', argnames=None):
     # Create candidate object
     candidate = Candidate(
         id=row[0],
+        split=row[1],
         context_names=argnames,
         contexts=spans,
         cids=cids,
