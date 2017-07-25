@@ -48,7 +48,7 @@ CONTEXT_OFFSET = 2
 # Note: We store the sentence here, not the sentence_id
 SPAN_COLS = ['id', 'sentence_id', 'char_start', 'char_end', 'meta']
 SENTENCE_COLS = ['id', 'document_id', 'position', 'text', 'words',
-    'char_offsets', 'lemmas', 'pos_tags', 'ner_tags', 'dep_parents',
+    'char_offsets', 'abs_char_offsets', 'lemmas', 'pos_tags', 'ner_tags', 'dep_parents',
     'dep_labels', 'entity_cids', 'entity_types']
 
 
@@ -62,7 +62,8 @@ def wrap_candidate(row, class_name='Candidate', argnames=None):
     """
     # Infer arity from size of row
     arity = float(len(row) - 2 - len(SENTENCE_COLS)) / (len(SPAN_COLS) + 1)
-    assert int(arity) == arity
+    assert int(arity) == arity, "%d is not a multiple of %d" % (len(row) - 2 - len(SENTENCE_COLS),
+                                                                len(SPAN_COLS) + 1)
     arity = int(arity)
 
     # NB: We hardcode in an assumed Context hierarchy here:
