@@ -107,15 +107,16 @@ class SparkLabelAnnotator:
                 self.candidate_class.__tablename__ + "_serialized") \
             .load()
 
-        rdd = jdbcDF.rdd.map(partial(
+        self.candidates = jdbcDF.rdd.map(partial(
             wrap_candidate,
             class_name=self.candidate_class.__name__,
             argnames=self.candidate_class.__argnames__
         ))
-        rdd = rdd.filter(lambda c: c.split==split)
-        rdd = rdd.setName("Snorkel Candidates, Split " + str(split) + \
-            " (" + self.candidate_class.__name__ + ")")
-        self.split_cache[split] = rdd.cache()
+        self.split_cache[split] = self.candidates\
+                                      .filter(lambda c: c.split==split)\
+                                      .setName("Snorkel Candidates, Split " + str(split) + \
+                                               " (" + self.candidate_class.__name__ + ")")\
+                                      .cache()
 
 
 class SparkFeatureAnnotator:
