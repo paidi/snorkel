@@ -74,6 +74,8 @@ script:
   - runipy cdr/CDR_Tutorial_2.ipynb
   - runipy cdr/CDR_Tutorial_3.ipynb
 
+  - runipy snark/Snark_Tutorial.ipynb
+
   # TODO check outputs, upload results, etc.
   # for more ideas, see: https://github.com/rossant/ipycache/issues/7
 
